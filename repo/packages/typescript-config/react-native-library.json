@@ -1,13 +1,12 @@
 {
-  "$schema": "https://json.schemastore.org/tsconfig",
-  "display": "React Native Library",
   "extends": "./base.json",
   "compilerOptions": {
+    "jsx": "react-native",
+    "lib": ["esnext"],
+    "moduleResolution": "node",
     "allowJs": true,
-    "jsx": "react",
-    "lib": ["DOM", "ESNext"],
-    "noEmit": true,
-    "resolveJsonModule": true,
-    "target": "ESNext"
-  }
+    "skipLibCheck": true
+  },
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
 }

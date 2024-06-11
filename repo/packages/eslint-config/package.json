@@ -1,0 +1,12 @@
+{
+  "name": "@repo/eslint-config",
+  "version": "1.0.0",
+  "main": "base.eslint.js",
+  "type": "module",
+  "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^latest",
+    "@typescript-eslint/parser": "^latest",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.3.2"
+  }
+}

@@ -2,18 +2,24 @@
   "name": "backend",
   "version": "1.0.0",
   "main": "src/index.js",
+  "type": "module",
   "scripts": {
     "start": "node src/index.js",
-    "dev": "nodemon src/index.js" 
+    "dev": "nodemon src/index.js",
+    "build": "tsc",
+    "lint": "eslint",
+    "lint-fix": "eslint . --fix"
   },
   "keywords": [],
   "author": "Your Name",
   "license": "ISC",
   "description": "A simple Express backend project",
   "dependencies": {
-    "express": "4.19.2" 
+    "express": "4.19.2",
+    "typescript": "^5.3.3"
   },
   "devDependencies": {
-    "nodemon": "^2.0.7" 
+    "nodemon": "^2.0.7",
+    "eslint": "^9.4.0"
   }
 }
