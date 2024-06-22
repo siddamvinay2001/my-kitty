@@ -12,6 +12,9 @@
     },
     "lint": {},
     "lint-fix": {},
+    "lint-staged": {},
+    "postinstall": {},
+    "pre-commit": {},
     "clean": {
       "cache": false
     }
