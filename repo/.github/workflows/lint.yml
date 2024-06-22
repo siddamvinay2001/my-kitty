@@ -3,10 +3,11 @@ name: Linting
 on:
   pull_request:
     branches:
-      - main
+      - '**'
 
 jobs:
-  lint:
+  Continuous-Integration:
+    name: Lint checks before merging pr
     runs-on: ubuntu-latest
 
     steps:
