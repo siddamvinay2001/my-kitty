@@ -10,8 +10,7 @@
     "clean": "turbo run clean && rm -rf node_modules",
     "lint": "turbo lint",
     "lint-fix": "turbo lint-fix",
-    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\" --ignore-path .gitignore",
-    "prepare": "husky install"
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\" --ignore-path .gitignore"
   },
   "devDependencies": {
     "turbo": "latest"
