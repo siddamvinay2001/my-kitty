@@ -1,0 +1,31 @@
+name: Linting
+
+on: 
+  pull_request:
+    branches:
+      - '**'
+
+jobs:
+  Continuous-Integration:
+    name: Lint checks before merging PR
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+
+      - name: Navigate to repo directory
+        run: cd repo
+
+      - name: Install dependencies
+        run: yarn install
+        working-directory: repo
+
+      - name: Lint code
+        run: yarn lint
+        working-directory: repo
