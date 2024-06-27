@@ -3,6 +3,7 @@
 **Authors**: Vinay Siddam and Sudheep Rao
 
 This monorepo contains the full-stack application for managing kitty parties, including backend, web frontend, and mobile frontend.
+figma :- https://www.figma.com/design/LK7JGD3LxEAKZASpTwKxkg/kitty-party-app?node-id=0-1&t=rDAURB1xuMyEjnkJ-1
 
 ## Table of Contents
 
