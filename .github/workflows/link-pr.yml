@@ -2,17 +2,28 @@ name: Auto Link and Close Issues
 
 on:
   pull_request:
-    types: [opened, edited, closed, reopened]
+    branches:
+      - '**'
 
 jobs:
   link_and_close_issues:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install jq
+        run: sudo apt-get install jq
+
+      - name: Output GITHUB_EVENT_PATH
+        run: cat "$GITHUB_EVENT_PATH"
+
       - name: Check PR Title for Issue Link
         id: check-pr-title
         run: |
           PR_TITLE=$(jq -r '.pull_request.title' "$GITHUB_EVENT_PATH")
+          echo "PR Title: $PR_TITLE"
           ISSUE_NUMBER=$(echo "$PR_TITLE" | grep -oE '\b(feat|defect) kitty_[0-9]+\b' | grep -oE '[0-9]+')
           echo "::set-output name=issue_number::$ISSUE_NUMBER"
 
@@ -22,12 +33,12 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const { issue_number } = context.payload.pull_request;
+            const issueNumber = '${{ steps.check-pr-title.outputs.issue_number }}';
             const issueTitle = context.payload.pull_request.title;
-            const issueLink = `#${issue_number}`;
+            const issueLink = `#${issueNumber}`;
             const commentBody = `PR ${issueLink} (${issueTitle}) is related to this issue.`;
             github.issues.createComment({
-              issue_number: ${{ steps.check-pr-title.outputs.issue_number }},
+              issue_number: issueNumber,
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: commentBody
@@ -39,9 +50,9 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const { issue_number } = context.payload.pull_request;
+            const issueNumber = '${{ steps.check-pr-title.outputs.issue_number }}';
             github.issues.update({
-              issue_number: ${{ steps.check-pr-title.outputs.issue_number }},
+              issue_number: issueNumber,
               owner: context.repo.owner,
               repo: context.repo.repo,
               state: 'closed'
