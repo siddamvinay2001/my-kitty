@@ -1,0 +1,34 @@
+name: Auto Link Issues
+
+on:
+  pull_request:
+    types: [opened, edited]
+
+jobs:
+  link_issues:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check PR Title for Issue Link
+        id: check-pr-title
+        run: |
+          PR_TITLE=$(jq -r '.pull_request.title' "$GITHUB_EVENT_PATH")
+          ISSUE_NUMBER=$(echo "$PR_TITLE" | grep -oE '\b(feat|defect) kitty_[0-9]+\b' | grep -oE '[0-9]+')
+          echo "::set-output name=issue_number::$ISSUE_NUMBER"
+
+      - name: Comment on Issue with PR Link
+        if: steps.check-pr-title.outputs.issue_number != ''
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { issue_number } = context.payload.pull_request;
+            const issueTitle = context.payload.pull_request.title;
+            const issueLink = `#${issue_number}`;
+            const commentBody = `PR ${issueLink} (${issueTitle}) is related to this issue.`;
+            github.issues.createComment({
+              issue_number: ${{ steps.check-pr-title.outputs.issue_number }},
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: commentBody
+            });
