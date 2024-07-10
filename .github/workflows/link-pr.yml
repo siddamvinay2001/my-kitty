@@ -1,11 +1,11 @@
-name: Auto Link Issues
+name: Auto Link and Close Issues
 
 on:
   pull_request:
-    types: [opened, edited]
+    types: [opened, edited, closed, reopened]
 
 jobs:
-  link_issues:
+  link_and_close_issues:
     runs-on: ubuntu-latest
 
     steps:
@@ -31,4 +31,18 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: commentBody
+            });
+
+      - name: Close Issue on PR Merge
+        if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { issue_number } = context.payload.pull_request;
+            github.issues.update({
+              issue_number: ${{ steps.check-pr-title.outputs.issue_number }},
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'closed'
             });
