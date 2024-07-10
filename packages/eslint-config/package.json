@@ -4,8 +4,8 @@
   "main": "base.eslint.js",
   "type": "module",
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^latest",
-    "@typescript-eslint/parser": "^latest",
+    "@typescript-eslint/eslint-plugin": "^7.16.0",
+    "@typescript-eslint/parser": "^7.16.0",
     "eslint-plugin-prettier": "^4.0.0",
     "prettier": "^2.3.2"
   }
