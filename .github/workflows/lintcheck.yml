@@ -1,12 +1,12 @@
 name: Linting
 
-on: 
+on:
   pull_request:
     branches:
       - '**'
 
 jobs:
-  Continuous-Integration:
+  lint:
     name: Lint checks before merging PR
     runs-on: ubuntu-latest
 
@@ -19,13 +19,8 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Navigate to repo directory
-        run: cd repo
-
       - name: Install dependencies
         run: yarn install
-        working-directory: repo
 
       - name: Lint code
         run: yarn lint
-        working-directory: repo
