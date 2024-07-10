@@ -4,8 +4,8 @@
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon",
-    "dev": "nodemon",
+    "start": "npx prisma generate && nodemon",
+    "dev": "npx prisma generate && nodemon",
     "build": "tsc",
     "lint": "eslint",
     "lint-fix": "eslint . --fix"
