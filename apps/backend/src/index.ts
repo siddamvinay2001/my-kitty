@@ -1,21 +1,15 @@
-// import express from 'express';
-//const app = use express()
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
+import express, { Application } from 'express';
+import bodyParser from 'body-parser';
+import dotenv from 'dotenv';
+import apiRouter from './api/index.js';
 
-async function insertUser(name: string, password: string) {
-  const res = await prisma.user.create({
-    data: { name, password },
-    select: { id: true, tokens: true },
-  });
-  console.log(res);
-}
+dotenv.config();
+const app: Application = express();
+const PORT: number | string = process.env.PORT || 3003;
 
-insertUser('kitty', 'WeLoveKitty');
+app.use(bodyParser.json());
+app.use('/api', apiRouter);
 
-// app.get('/', (req, res) => {
-//   res.json('Backend');
-// });
-// app.listen(3003, () => {
-//   console.log('Backend is up at 3003');
-// });
+app.listen(PORT, () => {
+  console.log(`Server is running at ${PORT}`);
+});

@@ -7,22 +7,33 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id          Int      @id @default(autoincrement())
-  email       String?  @unique
-  phoneNumber String?  @unique
-  name        String
-  password    String
-  tokens      Token[] //Establishing one to many relationship with Token table
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-}
 
-model Token {
-  id        Int      @id @default(autoincrement())
-  token     String   @unique
-  userId    Int
+model User {
+  id String @id @default(uuid())
+  username String @unique
+  name String
+  email String? @unique
+  phoneNumber String? @unique
+  password String
+  session Session[]
+  otp OTP[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  user      User     @relation(fields: [userId], references: [id]) //Foriegn key
+}
+
+model Session{
+  id String @id @default(uuid())
+  userId String
+  user User @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model OTP {
+  id String @id @default(uuid())
+  code String
+  userId String
+  user User @relation(fields: [userId], references: [id])
+  expiresAt DateTime
+  createdAt DateTime @default(now())
 }
