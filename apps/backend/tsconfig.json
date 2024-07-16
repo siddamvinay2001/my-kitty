@@ -2,8 +2,7 @@
   "extends": "@repo/typescript-config/backend.json",
   "compilerOptions": {
     "rootDir": "src",
-    "outDir": "dist",
-    "moduleResolution": "Node"
+    "outDir": "dist"
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules", ".next", ".turbo", "dist"]

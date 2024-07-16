@@ -1,11 +1,9 @@
 {
-    "$schema": "https://json.schemastore.org/tsconfig",
-    "display": "Backend",
-    "extends": "./base.json",
-    "compilerOptions": {
-      "target": "ESNext",
-      "noEmit": false,
-      "module": "ESNext",
-      "sourceMap": true
-    }
+  "extends": "./base.json",
+  "compilerOptions": {
+    "lib": ["ESNext"],
+    "allowJs": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
   }
+}
