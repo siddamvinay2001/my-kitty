@@ -20,6 +20,11 @@ export const passwordSchema = z
       'Password must contain at least one uppercase letter, one lowercase letter, one special character, and one number',
   });
 
+export const loginSchema = z.object({
+  username: z.union([emailSchema, phonenumberSchema]),
+  password: passwordSchema,
+});
+
 export const signupSchema = z
   .object({
     email: emailSchema.optional(),

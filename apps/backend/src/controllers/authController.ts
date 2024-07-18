@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { prisma } from '../db/index.js';
 import pkg from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-const { hashSync } = pkg;
+const { hashSync, compare } = pkg;
 
 export const signup = async (req: Request, res: Response) => {
   const { name, email, phoneNumber, password } = req.body;
@@ -69,4 +69,35 @@ export const test = async (req: Request, res: Response) => {
       error,
     });
   }
+};
+
+export const login = async (req: Request, res: Response) => {
+  const { username, password } = req.body;
+  try {
+    const user = await prisma.user.findUnique({
+      where: { username },
+      select: { username: true, password: true, id: true },
+    });
+    console.log('USER: ' + JSON.stringify(user));
+    if (!user) {
+      return res.status(404).json({
+        message: 'User not found, please signup',
+      });
+    }
+    const verifyPassword = await compare(password, user.password);
+    console.log('PASSWORD verify ' + verifyPassword);
+    if (!verifyPassword) {
+      return res.status(401).json({ message: 'Invalid Password' });
+    }
+    const token = jwt.sign(
+      { userId: user.id, username: user.username },
+      process.env.JWT_SECRET_TOKEN || 'your-secret-key',
+      { expiresIn: '7d' } // Token expires in 7 days
+    );
+
+    return res.status(201).json({
+      message: 'User successfully logged in',
+      token,
+    });
+  } catch (error) {}
 };
