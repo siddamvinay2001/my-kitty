@@ -18,6 +18,9 @@
       "cache": false,
       "persistent": true
     },
+    "migrate":{
+      "cache": false
+    },
     "lint": {},
     "lint-fix": {},
     "clean": {

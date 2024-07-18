@@ -4,6 +4,7 @@
   "main": "src/index.js",
   "type": "module",
   "scripts": {
+    "migrate":"npx prisma migrate dev",
     "start": "npx prisma generate && nodemon",
     "dev": "npx prisma generate && nodemon",
     "build": "tsc",
