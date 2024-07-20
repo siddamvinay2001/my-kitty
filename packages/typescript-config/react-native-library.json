@@ -4,6 +4,7 @@
     "jsx": "react-native",
     "lib": ["esnext"],
     "moduleResolution": "node",
+    "module": "esnext",
     "allowJs": true,
     "skipLibCheck": true
   },

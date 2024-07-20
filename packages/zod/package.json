@@ -1,0 +1,29 @@
+{
+  "name": "@my-kitty/zod",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "tsc --watch",
+    "build": "tsc -b"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "*",
+    "typescript": "^5.3.3",
+    "zod": "^3.23.8"
+  },
+  "exports": {
+    "./userSchema": {
+      "types": "./src/userSchema.ts",
+      "default": "./dist/userSchema.js"
+    },
+    "./index": {
+      "types": "./src/index.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
