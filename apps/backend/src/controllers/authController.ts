@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { prisma } from '../db/index.js';
+import { prisma } from '../db';
 import pkg from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 const { hashSync, compare } = pkg;
