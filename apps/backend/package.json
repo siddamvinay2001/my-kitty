@@ -5,7 +5,7 @@
   "scripts": {
     "migrate": "npx prisma migrate dev",
     "start": "npx prisma generate && nodemon",
-    "dev": "npx prisma generate && tsc -b && node dist/index.js",
+    "dev": "npx nodemon src/index.ts",
     "build": "tsc -b",
     "lint": "eslint",
     "lint-fix": "eslint . --fix"
@@ -32,6 +32,8 @@
   "devDependencies": {
     "@repo/typescript-config": "*",
     "eslint": "^9.4.0",
+    "nodemon": "^3.1.4",
+    "ts-node": "^10.9.2",
     "typescript": "^5.5.3"
   }
 }

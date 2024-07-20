@@ -4,10 +4,6 @@
   "compilerOptions": {
     "rootDir": "./src",
     "outDir": "./dist",
-    "baseUrl": "./src",
-    "paths": {
-      "*": ["*", "*/index.ts"]
-    },
     "sourceMap": true
   },
   "include": ["src/**/*.ts"],
