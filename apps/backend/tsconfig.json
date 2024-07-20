@@ -1,9 +1,25 @@
 {
   "extends": "@repo/typescript-config/backend.json",
+  "compileOnSave": true,
   "compilerOptions": {
-    "rootDir": "src",
-    "outDir": "dist",
+    "noEmit": false,
+    "strict": false,
+    "alwaysStrict": false,
+    "noImplicitAny": false,
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "baseUrl": "./src",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "paths": {
+      "*": ["*", "*/index.ts"]
+    },
+    "sourceMap": true
+  },
+  "ts-node": {
+    "files": true,
+    "require": ["tsconfig-paths/register"]
   },
   "include": ["src/**/*.ts"],
-  "exclude": ["node_modules", ".next", ".turbo", "dist"]
+  "exclude": ["node_modules", ".next", ".turbo"]
 }

@@ -4,6 +4,7 @@
     "lib": ["ESNext"],
     "allowJs": true,
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "module": "commonjs"
   }
 }
