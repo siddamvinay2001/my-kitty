@@ -4,6 +4,15 @@
     "lib": ["ESNext"],
     "allowJs": true,
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "noEmit": false,
+    "strict": false,
+    "alwaysStrict": false,
+    "noImplicitAny": false,
+    "allowSyntheticDefaultImports": true
+  },
+  "ts-node": {
+    "files": true,
+    "require": ["tsconfig-paths/register"]
   }
 }

@@ -1,7 +1,17 @@
 import { Request, Response, NextFunction } from 'express';
+import jwt, { JwtPayload } from 'jsonwebtoken';
+
+interface DecodedToken extends JwtPayload {
+  username: string;
+  id: string;
+}
+
+interface CustomRequest extends Request {
+  username: string;
+}
 
 export const authMiddleware = async (
-  req: Request,
+  req: CustomRequest,
   res: Response,
   next: NextFunction
 ) => {
@@ -17,7 +27,8 @@ export const authMiddleware = async (
     const decodeToken = jwt.verify(
       token,
       process.env.JWT_SECRET_TOKEN || 'your-secret-key'
-    );
+    ) as DecodedToken;
+
     if (req.username == decodeToken.username) {
       next();
     }

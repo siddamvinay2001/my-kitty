@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { validateMiddleware } from '../../middleware/validateMiddleware.js';
-import { signup, login } from '../../controllers/authController.js';
-import { loginSchema, signupSchema } from '../../zod/userSchema.js';
+import { validateMiddleware } from '../../middleware/validateMiddleware';
+import { signup, login } from '../../controllers/authController';
+import { loginSchema, signupSchema } from '@my-kitty/zod/userSchema';
 
 const v1Router: Router = Router();
 

@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
-import { signupSchema } from '../zod/userSchema.js';
-import { ZodSchema } from 'zod';
+import { signupSchema } from '@my-kitty/zod/userSchema';
+import { ZodSchema } from '@my-kitty/zod/index';
 
 export const signupValidator = async (
   req: Request,

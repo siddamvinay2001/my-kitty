@@ -5,7 +5,7 @@
     "packages/*"
   ],
   "scripts": {
-    "migrate":"turbo run migrate",
+    "migrate": "turbo run migrate",
     "dev": "turbo run dev",
     "build": "turbo run build",
     "clean": "turbo run clean && rm -rf node_modules",
