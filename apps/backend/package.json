@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "main": "src/index.js",
   "scripts": {
-    "migrate": "npx prisma migrate dev",
-    "start": "npx prisma generate && npx nodemon src/index.ts",
+    "start": "npx nodemon src/index.ts",
     "dev": "npx nodemon src/index.ts",
     "build": "tsc -b",
     "lint": "eslint",
@@ -15,7 +14,15 @@
   "license": "ISC",
   "description": "A simple Express backend project",
   "dependencies": {
-    "@prisma/client": "^5.16.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.3"
+  },
+  "devDependencies": {
+    "@my-kitty/zod": "*",
+    "@my-kitty/database": "*",
+    "@repo/typescript-config": "*",
+    "eslint": "^9.4.0",
+    "nodemon": "^3.1.4",
     "@types/bcryptjs": "^2.4.6",
     "@types/express": "^4.17.21",
     "@types/jsonwebtoken": "^9.0.6",
@@ -23,17 +30,6 @@
     "bcryptjs": "^2.4.3",
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
-    "otplib": "^12.0.1",
-    "prisma": "^5.16.2",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.5.3"
-  },
-  "devDependencies": {
-    "@my-kitty/zod": "*",
-    "@repo/typescript-config": "*",
-    "eslint": "^9.4.0",
-    "nodemon": "^3.1.4",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.5.3"
+    "otplib": "^12.0.1"
   }
 }

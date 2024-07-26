@@ -29,12 +29,9 @@ export const authMiddleware = async (
       process.env.JWT_SECRET_TOKEN || 'your-secret-key'
     ) as DecodedToken;
 
-    if (req.username == decodeToken.username) {
-      next();
-    }
-    return res.status(403).json({
-      message: 'Session not valid login again',
-    });
+    req.username = decodeToken.username;
+    req.id = decodeToken.id;
+    next();
   } catch (error) {
     return res.status(403).json({
       message: 'Authorization not valid',
