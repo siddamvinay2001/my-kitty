@@ -7,7 +7,8 @@ interface DecodedToken extends JwtPayload {
 }
 
 interface CustomRequest extends Request {
-  username: string;
+  username?: string;
+  id?: string
 }
 
 export const authMiddleware = async (
