@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { PrismaClient } from '@my-kitty/database';
+import { PrismaClient } from '@my-kitty/database/index';
 import pkg from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 const { hashSync, compare } = pkg;
