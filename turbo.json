@@ -11,7 +11,7 @@
       "persistent": true
     },
     "backend#dev": {
-      "dependsOn": ["@my-kitty/zod#build","@my-kitty/database#build"]
+      "dependsOn": ["@my-kitty/database#build", "@my-kitty/zod#build"]
     },
     "migrate": {
       "cache": false
