@@ -1,11 +1,12 @@
 {
   "name": "@my-kitty/database",
   "version": "1.0.0",
-  "main": "./src/index.js",
+  "main": "src/index.js",
   "scripts": {
-    "dev": "tsc --watch",
-    "build": "tsc -b",
-    "migrate": "npx prisma generate",
+    "init": "npx prisma generate",
+    "dev": "npx prisma migrate && tsc --watch",
+    "build": "npx prisma generate && tsc -b",
+    "migrate": "npx prisma generate && npx prisma generate",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -14,7 +15,9 @@
   "description": "",
   "dependencies": {
     "@prisma/client": "^5.17.0",
+    "@types/mongoose": "^5.11.97",
     "@types/node": "^20.14.12",
+    "mongoose": "^8.5.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.4"
   },
@@ -22,9 +25,9 @@
     "@repo/typescript-config": "*"
   },
   "exports": {
-    "./index": {
-      "types" : "./src/index.ts",
-      "default" :"./dist/index.js"
-  }
+    "./db": {
+      "types": "./src/index.ts",
+      "default": "./dist/index.js"
+    }
   }
 }

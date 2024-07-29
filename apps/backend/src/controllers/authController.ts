@@ -1,9 +1,8 @@
 import { Request, Response } from 'express';
-import { PrismaClient } from '@my-kitty/database/index';
+import { prisma } from '@my-kitty/database/db';
 import pkg from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 const { hashSync, compare } = pkg;
-const prisma = new PrismaClient();
 
 export const signup = async (req: Request, res: Response) => {
   const { name, email, phoneNumber, password } = req.body;
@@ -100,5 +99,5 @@ export const login = async (req: Request, res: Response) => {
       message: 'User successfully logged in',
       token,
     });
-  } catch (error) {}
+  } catch (error) { }
 };
