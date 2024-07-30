@@ -1,32 +1,35 @@
-# Turborepo react-native starter
+# My Kitty Party App
 
-This is an official starter Turborepo.
+My Kitty Party is a group-based application where users can form groups, pool money monthly, and select a winner each month through a lucky spin. The application includes backend services for authentication, chat, user management, and transactions. It uses a combination of PostgreSQL and MongoDB databases.
 
-## Using this example
+## Project Structure
 
-Run the following command:
+The project is organized as a monorepo with the following structure:
+
+
+### Apps
+
+- **backend**: Contains the user services, including authentication, user management, and transactions. Uses Express.js and Prisma for PostgreSQL.
+- **chat**: Handles real-time messaging using WebSockets and stores messages in MongoDB for faster reads.
+- **web**: The web frontend built with Next.js.
+- **native**: The mobile application built with React Native.
+
+### Packages
+
+- **eslint-config**: Shared ESLint configuration for consistent code quality.
+- **tsconfig**: Shared TypeScript configuration for all projects.
+- **zod**: Shared Zod schemas for validation across different services.
+- **database**: Database configurations and migrations using Prisma for PostgreSQL and Mongoose for MongoDB.
+- **shared-ui**: Shared UI components used across web and native applications.
+
+## Databases
+
+- **PostgreSQL**: Used for storing user information, groups, and transactions.
+- **MongoDB**: Used for storing chat messages and group messages for faster reads.
+
+## Yarn Workspaces
+
+This project uses Yarn workspaces to manage dependencies across multiple packages. To install dependencies, run:
 
 ```sh
-npx create-turbo@latest -e with-react-native-web
-```
-
-## What's inside?
-
-This Turborepo includes the following packages/apps:
-
-### Apps and Packages
-
-- `native`: a [react-native](https://reactnative.dev/) app built with [expo](https://docs.expo.dev/)
-- `web`: a [Next.js](https://nextjs.org/) app built with [react-native-web](https://necolas.github.io/react-native-web/)
-- `@repo/ui`: a stub [react-native](https://reactnative.dev/) component library shared by both `web` and `native` applications
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [Expo](https://docs.expo.dev/) for native development
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [Prettier](https://prettier.io) for code formatting
+yarn install
