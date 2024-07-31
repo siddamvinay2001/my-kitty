@@ -1,5 +1,6 @@
 const config = {
   reactStrictMode: true,
+  transpilePackages: ["@my-kitty/ui"],
   webpack: (config) => {
     config.resolve.alias = {
       ...(config.resolve.alias || {}),

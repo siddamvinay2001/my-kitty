@@ -1,0 +1,1 @@
+module.exports = require("@my-kitty/config/tailwind/tailwind.config");

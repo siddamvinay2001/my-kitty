@@ -5,6 +5,7 @@ import {
   GestureResponderEvent,
   Text,
 } from "react-native";
+import "../syles.css"
 
 export interface ButtonProps {
   text: string;
