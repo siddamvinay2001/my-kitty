@@ -1,5 +1,5 @@
 {
-  "extends": "@repo/typescript-config/react-native-library.json",
+  "extends": "@my-kitty/typescript-config/react-native-library.json",
   "compilerOptions": {
     "strict": true
   },
