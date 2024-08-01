@@ -1,5 +1,5 @@
 {
-  "extends": "@repo/typescript-config/backend.json",
+  "extends": "@my-kitty/typescript-config/backend.json",
   "compileOnSave": true,
   "compilerOptions": {
     "rootDir": "./src",

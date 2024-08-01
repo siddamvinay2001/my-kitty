@@ -22,7 +22,7 @@
     "typescript": "^5.5.4"
   },
   "devDependencies": {
-    "@repo/typescript-config": "*"
+    "@my-kitty/typescript-config": "*"
   },
   "exports": {
     "./db": {

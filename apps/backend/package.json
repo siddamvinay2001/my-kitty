@@ -20,7 +20,7 @@
   "devDependencies": {
     "@my-kitty/zod": "*",
     "@my-kitty/database": "*",
-    "@repo/typescript-config": "*",
+    "@my-kitty/typescript-config": "*",
     "eslint": "^9.4.0",
     "nodemon": "^3.1.4",
     "@types/bcryptjs": "^2.4.6",
