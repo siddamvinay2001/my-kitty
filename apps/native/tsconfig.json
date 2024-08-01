@@ -1,6 +1,7 @@
 {
   "extends": "@my-kitty/typescript-config/react-native-library.json",
   "compilerOptions": {
+    "types": ["nativewind/types"],
     "strict": true
   },
   "include": ["**/*.ts", "**/*.tsx"],
