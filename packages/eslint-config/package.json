@@ -1,5 +1,5 @@
 {
-  "name": "@repo/eslint-config",
+  "name": "@my-kitty/eslint-config",
   "version": "1.0.0",
   "main": "base.eslint.js",
   "type": "module",

@@ -8,7 +8,7 @@
     "build": "tsc -b"
   },
   "devDependencies": {
-    "@repo/typescript-config": "*",
+    "@my-kitty/typescript-config": "*",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.4",
     "zod": "^3.23.8"

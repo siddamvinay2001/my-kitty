@@ -1,12 +1,12 @@
 'use client';
 
-import { Button } from '@repo/ui';
+import { Button } from '@my-kitty/ui';
 
-import styles from '../styles/index.module.css';
+import '../styles/global.css';
 
 export default function Web() {
   return (
-    <div className={styles.container}>
+    <div className="text-center  text-3xl text-red-500">
       <h1>Web</h1>
       <Button onClick={() => console.log('Pressed!')} text="Boop" />
     </div>

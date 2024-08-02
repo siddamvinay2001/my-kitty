@@ -1,4 +1,4 @@
-import baseConfig from '@repo/eslint-config/base.eslint.js';
+import baseConfig from '@my-kitty/eslint-config/base.eslint.js';
 import reactPlugin from 'eslint-plugin-react';
 
 export default [
