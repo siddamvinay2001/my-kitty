@@ -3,12 +3,12 @@ import jwt, { JwtPayload } from 'jsonwebtoken';
 
 interface DecodedToken extends JwtPayload {
   username: string;
-  id: string;
+  userId: string;
 }
 
 interface CustomRequest extends Request {
   username?: string;
-  id?: string
+  userId?: string;
 }
 
 export const authMiddleware = async (
@@ -19,7 +19,7 @@ export const authMiddleware = async (
   try {
     const authHeader = req.headers.authorization;
     if (!authHeader || !authHeader.startsWith('Bearer')) {
-      res.status(403).json({
+      return res.status(403).json({
         message: 'User not authorized',
       });
     }
@@ -31,7 +31,7 @@ export const authMiddleware = async (
     ) as DecodedToken;
 
     req.username = decodeToken.username;
-    req.id = decodeToken.id;
+    req.userId = decodeToken.userId;
     next();
   } catch (error) {
     return res.status(403).json({
