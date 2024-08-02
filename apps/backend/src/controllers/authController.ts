@@ -78,14 +78,12 @@ export const login = async (req: Request, res: Response) => {
       where: { username },
       select: { username: true, password: true, id: true },
     });
-    console.log('USER: ' + JSON.stringify(user));
     if (!user) {
       return res.status(404).json({
         message: 'User not found, please signup',
       });
     }
     const verifyPassword = await compare(password, user.password);
-    console.log('PASSWORD verify ' + verifyPassword);
     if (!verifyPassword) {
       return res.status(401).json({ message: 'Invalid Password' });
     }
@@ -99,5 +97,5 @@ export const login = async (req: Request, res: Response) => {
       message: 'User successfully logged in',
       token,
     });
-  } catch (error) { }
+  } catch (error) {}
 };
