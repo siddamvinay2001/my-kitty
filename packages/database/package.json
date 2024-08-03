@@ -28,6 +28,18 @@
     "./db": {
       "types": "./src/index.ts",
       "default": "./dist/index.js"
+    },
+    "./group":{
+      "types": "./src/api/groupApi.ts",
+      "default": "./dist/api/groupApi.js"
+    },
+    "./user":{
+      "types": "./src/api/userApi.ts",
+      "default": "./dist/api/userApi.js"
+    },
+    "./messages":{
+      "types": "./src/api/messageApi.ts",
+      "default": "./dist/api/messageApi.js"
     }
   }
 }

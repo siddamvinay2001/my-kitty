@@ -1,2 +1,3 @@
-export * from './mongoose'
-export * from './postgresql'
+
+export * from './mongoose/index';
+export * from './postgresql/index';
