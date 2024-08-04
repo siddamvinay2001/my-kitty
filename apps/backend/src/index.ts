@@ -7,6 +7,8 @@ import express, {
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import apiRouter from './api';
+import { connectToPostgresql } from "@my-kitty/database/db"
+
 
 dotenv.config();
 const app: Application = express();
@@ -22,6 +24,7 @@ app.use((error: ErrorRequestHandler, req: Request, res: Response) => {
   });
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, async() => {
+  await connectToPostgresql();
   console.log(`Server is runnning at ${PORT}`);
 });

@@ -1,4 +1,3 @@
-import exp from 'constants';
 import {prisma} from '../postgresql';
 
 export const createNewGroup = async(userId:string, groupName:string, groupDescription:string)=>{
@@ -68,3 +67,4 @@ export const addUserToGroup = async (userIdToAdd:string, groupIdToAdd:string)=>{
         console.log("failed adding user to group");
     }
 } 
+

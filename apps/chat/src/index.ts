@@ -3,8 +3,9 @@ import { WebSocketServer, WebSocket } from 'ws';
 import { manageSocketConnections, getConnectedClients } from './controllers/wsInitController';
 import dotenv from 'dotenv';
 import { authMiddleware } from './middleware/authMiddleware';
-import { prisma } from '@my-kitty/database/db';
-import { getAllUserIdExcept } from './util/usersUtil';
+import { connectToPostgresql, connectToMongoose } from '@my-kitty/database/db';
+import { getAllUsersInGroup } from '@my-kitty/database/user';
+import { sendLiveMessages } from './controllers/messageController';
 
 interface CustomRequest extends Request{
     username?: string;
@@ -14,7 +15,9 @@ interface CustomRequest extends Request{
 dotenv.config();
 
 const app = express();
-const httpServer = app.listen(process.env.WS_PORT || 3005, () => {
+const httpServer = app.listen(process.env.WS_PORT || 3005, async() => {
+    await connectToPostgresql();
+    await connectToMongoose(process.env.MONGO_URI);
     console.log(`PORT ${process.env.WS_PORT} is live`);
 });
 
@@ -28,23 +31,4 @@ httpServer.on('upgrade', (request: Request, socket: any, head: Buffer) => {
 
 app.use(express.json());
 
-app.post('/send-message', authMiddleware, async (req: CustomRequest, res: Response) => {
-    try{
-        const {userId} = req;
-        const {message, groupId} = req.body.message;
-
-        const usersInGroup = getAllUserIdExcept(groupId,userId);
-        console.log(usersInGroup);
-
-        return res.status(200).json({
-            usersInGroup
-        })
-
-
-    }catch(err){
-        return res.status(500).json({
-            message : "Unable to send messages",
-            err
-        })
-    }
-});
+app.post('/send-message', authMiddleware, sendLiveMessages);

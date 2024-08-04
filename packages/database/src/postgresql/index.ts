@@ -1,5 +1,7 @@
 import { PrismaClient } from "@prisma/client";
+import dotenv from 'dotenv'
 
+dotenv.config();
 let prisma : PrismaClient | null = null;
 
 export const connectToPostgresql = async()=>{
@@ -13,8 +15,6 @@ export const connectToPostgresql = async()=>{
         console.log("Unable to connect to postgresql",err);
     }
 }
-connectToPostgresql();
-export {prisma}
 
 process.on('SIGINT', async () => {
     if (prisma) {
@@ -31,3 +31,5 @@ process.on('SIGTERM', async () => {
     }
     process.exit(0);
 });
+
+export {prisma}

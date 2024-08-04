@@ -54,3 +54,20 @@ export const getUser = async (username: string, fields: UserFields[]) => {
         throw err;  // Re-throw error after logging
     }
 }
+
+export const getAllUsersInGroup = async(groupIdToSearch, condition)=>{
+    try{
+        const users = await prisma.userGroup.findMany({
+            where:{
+                groupId : groupIdToSearch,
+                ...condition
+            },
+            select:{
+                userId: true
+            }
+        });
+        return users;
+    }catch(err){    
+        console.log("Error fetching userIds:",err);
+    }
+}

@@ -3,6 +3,7 @@ import pkg from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 const { hashSync, compare } = pkg;
 import { getUser, createNewUser } from '@my-kitty/database/user'
+import { json } from 'stream/consumers';
 
 export const signup = async (req: Request, res: Response) => {
   const { name, email, phoneNumber, password } = req.body;
@@ -80,5 +81,10 @@ export const login = async (req: Request, res: Response) => {
       message: 'User successfully logged in',
       token,
     });
-  } catch (error) {}
+  } catch (error) {
+    return res.status(500).json({
+      message: "Internal server erro",
+      error
+    })
+  }
 };
