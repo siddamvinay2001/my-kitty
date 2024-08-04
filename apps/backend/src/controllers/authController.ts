@@ -3,14 +3,13 @@ import pkg from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 const { hashSync, compare } = pkg;
 import { getUser, createNewUser } from '@my-kitty/database/user'
-import { json } from 'stream/consumers';
+
 
 export const signup = async (req: Request, res: Response) => {
   const { name, email, phoneNumber, password } = req.body;
   try {
     const username = email ? email : phoneNumber;
     const user =  await getUser(username,['username'])
-
     if (user) {
       return res.status(400).json({
         message:
@@ -45,7 +44,7 @@ export const signup = async (req: Request, res: Response) => {
   }
 };
 
-export const test = async (req: Request, res: Response) => {
+export const testMe = async (req: Request, res: Response) => {
   try {
     return res.status(200).json({
       message: 'Bad Request',

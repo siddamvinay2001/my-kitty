@@ -12,6 +12,6 @@ export const saveMessage = async(senderId:string, groupId:string,content:string)
         )
         console.log("Message saved successfully!!");
     }catch(error){
-        console.log("Unable to save message");
+        console.log("Unable to save message",error);
     }
 }

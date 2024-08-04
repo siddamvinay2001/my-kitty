@@ -64,7 +64,7 @@ export const addUserToGroup = async (userIdToAdd:string, groupIdToAdd:string)=>{
         });
         return userToGroup;
     }catch(err){
-        console.log("failed adding user to group");
+        console.log("failed adding user to group",err);
     }
 } 
 

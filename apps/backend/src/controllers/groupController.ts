@@ -47,6 +47,11 @@ export const addUsersToGroup = async (req: Request, res: Response) => {
       });
     }
     const addNewUserToGroup = await addUserToGroup(userId,groupId);
+    if(!addNewUserToGroup){
+      return res.status(500).json({
+        message: "Unable to join group"
+      })
+    }
     return res.status(200).json({
       message: 'Successfully joined the group',
       addNewUserToGroup,
