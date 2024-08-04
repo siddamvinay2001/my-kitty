@@ -1,35 +1,25 @@
-import { group, timeStamp } from "console";
-import { randomUUID } from "crypto";
-import mongoose, { Schema, model, connect, Document } from "mongoose";
+import mongoose from "mongoose";
+import dotenv from "dotenv"
+dotenv.config();
 
-interface IMessage extends Document {
-    senderId: string;
-    groupId: number;
-    content: string;
-    createdAt: Date;
+export const connectToMongoose = async(url)=>{
+    try{
+        await mongoose.connect(url || process.env.MONGO_URI);
+        console.log("Connected to MongoDb")
+    }
+    catch(err){
+        console.log("Cannot connect to mongoDb", err);
+    }
 }
 
-interface IGroupMessage extends Document {
-    groupId: string;
-    messages: IMessage[];
-    lastUpdate: Date;
-}
+process.on('SIGINT', async () => {
+    await mongoose.disconnect();
+    console.log('Mongoose disconnected');
+    process.exit(0);
+});
 
-const MessageSchema: Schema = new Schema({
-    senderId: { type: String, required: true },
-    groupId: { type: String, required: true },
-    content: { type: String, required: true },
-    createdAt: { type: Date, default: Date.now },
-})
-
-const GroupMessageSchema: Schema = new Schema({
-    groupId: { type: String, required: true },
-    messages: { type: [MessageSchema], default: [] },
-    lastUpdated: { type: Date, default: Date.now }
-})
-
-const Message = mongoose.model<IMessage>("Message", MessageSchema);
-const GroupMessage = mongoose.model<IGroupMessage>('GroupMessage', GroupMessageSchema);
-
-export { Message, GroupMessage };
-export type { IMessage, IGroupMessage };
+process.on('SIGTERM', async () => {
+    await mongoose.disconnect();
+    console.log('Mongoose disconnected');
+    process.exit(0);
+});
