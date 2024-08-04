@@ -1,4 +1,4 @@
-import { prisma } from '@my-kitty/database/db';
+import { createNewGroup,addUserToGroup,verifyIfUserPresentInGroup } from '@my-kitty/database/group';
 import { Request, Response } from 'express';
 
 interface requestBodyType extends Request {
@@ -15,29 +15,14 @@ export const createGroupAndAssignAdmin = async (
   try {
     const { name, description }: requestBodyType = req.body;
     const { userId }: any = req;
-    const newGroup = await prisma.group.create({
-      data: {
-        name,
-        description,
-      },
-    });
+    const newGroup = await createNewGroup(userId, name, description);
 
-    const newUserGroup = await prisma.userGroup.create({
-      data: {
-        role: 'Admin',
-        group: {
-          connect: {
-            id: newGroup.id,
-          },
-        },
-        user: {
-          connect: {
-            id: userId,
-          },
-        },
-      },
-    });
-
+    if(!newGroup){
+      return res.status(500).json({
+        message: "Unable to create new group, please contact support"
+      })
+    }
+    
     return res.status(200).json({
       message: 'New group has been created successfully',
       newGroup,
@@ -54,37 +39,17 @@ export const addUsersToGroup = async (req: Request, res: Response) => {
   try {
     const { groupId } = req.body;
     const { userId }: any = req;
-    const existingGroup = await prisma.userGroup.findUnique({
-      where: {
-        userId_groupId: {
-          userId,
-          groupId,
-        },
-      },
-    });
-    if (existingGroup) {
+    
+    const userExistsInGroup = await verifyIfUserPresentInGroup(userId,groupId)
+    if (userExistsInGroup) {
       return res.status(400).json({
         message: 'User is already part of the group',
       });
     }
-    const addUserToGroup = await prisma.userGroup.create({
-      data: {
-        role: 'kitty',
-        user: {
-          connect: {
-            id: userId,
-          },
-        },
-        group: {
-          connect: {
-            id: groupId,
-          },
-        },
-      },
-    });
+    const addNewUserToGroup = await addUserToGroup(userId,groupId);
     return res.status(200).json({
       message: 'Successfully joined the group',
-      addUserToGroup,
+      addNewUserToGroup,
     });
   } catch (err) {
     res.status(500).json({
